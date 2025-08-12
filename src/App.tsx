@@ -3,6 +3,7 @@ import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
 import { TodoList } from './components/TodoList';
 import { useState } from 'react';
+import { User } from './types/user';
 
 export const App = () => {
   const [title, setTitle] = useState('');
@@ -24,7 +25,9 @@ export const App = () => {
       return;
     }
 
-    const maxId = Math.max(...todos.map(todo => todo.id));
+    const maxId = Math.max(...todos.map(todo => todo.id), 0);
+
+    const selectedUser: User = usersFromServer.find(u => u.id === user)!;
 
     setTodos(prev => [
       ...prev,
@@ -33,6 +36,7 @@ export const App = () => {
         title: title.trim(),
         completed: false,
         userId: user,
+        user: selectedUser, // ✅ добавили объект пользователя
       },
     ]);
 

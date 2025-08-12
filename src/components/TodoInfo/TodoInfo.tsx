@@ -1,6 +1,5 @@
 import { Todo } from '../../types/todo';
 import { UserInfo } from '../UserInfo';
-import { findUser } from '../../services/findUser';
 
 type Props = {
   todo: Todo;
@@ -14,10 +13,7 @@ export const TodoInfo: React.FC<Props> = ({ todo }) => {
     >
       <h2 className="TodoInfo__title">{todo.title}</h2>
 
-      {/* <a className="UserInfo" href="mailto:Sincere@april.biz">
-        Leanne Graham
-      </a> */}
-      <UserInfo user={findUser(todo.userId)} />
+      <UserInfo user={todo.user} />
     </article>
   );
 };
